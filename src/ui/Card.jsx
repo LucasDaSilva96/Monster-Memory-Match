@@ -1,10 +1,13 @@
 import "../css/cards.css";
 
-function Card({ image_src, monster, rotate, handleCardRotate }) {
-  if (!image_src || !monster) return;
+function Card({ image_src, monster, rotate, handleFunction }) {
+  if (!image_src || !monster) return null;
   return (
-    <article className="card" onClick={() => handleCardRotate(monster)}>
-      <div className={!rotate ? "card__content" : "card__content rotate"}>
+    <article className="card">
+      <div
+        className={!rotate ? "card__content" : "card__content rotate"}
+        onClick={() => handleFunction(monster)}
+      >
         <div className="card__front">
           <img className="card__img" src={image_src} alt={monster} />
           <p className="card__subtitle">{monster}</p>

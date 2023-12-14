@@ -1,0 +1,42 @@
+.loader {
+  display: inline-flex;
+  gap: 10px;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.loader:before,
+.loader:after {
+  content: "";
+  height: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #000 95%, #0000) 35% 35%/6px 6px
+    no-repeat #fff;
+  animation: l5 3s infinite;
+}
+@keyframes l5 {
+  0%,
+  11% {
+    background-position: 35% 35%;
+  }
+  14%,
+  36% {
+    background-position: 65% 35%;
+  }
+  38%,
+  61% {
+    background-position: 65% 65%;
+  }
+  64%,
+  86% {
+    background-position: 35% 65%;
+  }
+  88%,
+  100% {
+    background-position: 35% 35%;
+  }
+}

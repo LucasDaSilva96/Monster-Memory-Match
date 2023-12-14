@@ -1,22 +1,30 @@
 import styled from "styled-components";
 import { MONSTERS_EASY, MONSTERS_MEDIUM, MONSTERS_HARD } from "./data/monsters";
 import Card from "./ui/Card";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import CardsWrapper from "./ui/CardsWrapper";
+import StartScreen from "./ui/StartScreen";
+import Spinner from "./ui/Spinner";
 
-const Wrapper = styled.main`
+const Container = styled.main`
   max-width: 100%;
   min-height: 100vh;
   padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  row-gap: 10px;
 `;
 
 const MONSTERS_SELECTED = [];
-let selectedArray = MONSTERS_HARD;
 
 function App() {
   const [rotate, setRotate] = useState(false);
+  const [level, setLevel] = useState("");
+  const [selectedArray, setSelectedArray] = useState(null);
+  const [startGame, setStartGame] = useState(false);
+
+  useEffect(() => {
+    if (level === "Easy") setSelectedArray(MONSTERS_EASY);
+    if (level === "Medium") setSelectedArray(MONSTERS_MEDIUM);
+    if (level === "Hard") setSelectedArray(MONSTERS_HARD);
+  }, [level, selectedArray]);
 
   const shuffle = useCallback((array) => {
     return array
@@ -25,53 +33,28 @@ function App() {
       .map((a) => a.value);
   }, []);
 
-  function handleCardRotate(monster) {
-    // setRotate((e) => !e);
-    handleCardSelection(monster);
-  }
-
   function handleCardSelection(monster) {
     const hasSelected = MONSTERS_SELECTED.findIndex((el) => el === monster);
     if (hasSelected >= 0) {
       window.alert("You lost");
       return;
     } else {
-      MONSTERS_SELECTED.push(monster);
       setRotate((e) => !e);
-      selectedArray = shuffle(selectedArray);
+      MONSTERS_SELECTED.push(monster);
+      setTimeout(() => {
+        setSelectedArray((value) => (value = shuffle(value)));
+      }, 1000);
+
       setTimeout(() => {
         setRotate((e) => !e);
-      }, 1000);
+      }, 1500);
     }
   }
 
   return (
-    <Wrapper>
-      <Card rotate={rotate} handleCardRotate={handleCardRotate} />
-      {!rotate
-        ? selectedArray.map((card) => {
-            return (
-              <Card
-                rotate={rotate}
-                handleCardRotate={handleCardRotate}
-                monster={card.monster}
-                image_src={card.image_src}
-                key={card.monster}
-              />
-            );
-          })
-        : selectedArray.map((card) => {
-            return (
-              <Card
-                rotate={!rotate}
-                handleCardRotate={handleCardRotate}
-                monster={card.monster}
-                image_src={card.image_src}
-                key={card.monster}
-              />
-            );
-          })}
-    </Wrapper>
+    <React.Fragment>
+      <Spinner />
+    </React.Fragment>
   );
 }
 
