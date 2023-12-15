@@ -1,5 +1,4 @@
 import "../css/levelButton.css";
-import Spinner from "./Spinner";
 
 function LevelButton({ handleLevel, levelText = "Easy", handleStartGame }) {
   return (

@@ -1,37 +1,37 @@
-import styled from "styled-components";
 import { MONSTERS_EASY, MONSTERS_MEDIUM, MONSTERS_HARD } from "./data/monsters";
-import Card from "./ui/Card";
 import React, { useCallback, useEffect, useState } from "react";
 import CardsWrapper from "./ui/CardsWrapper";
 import StartScreen from "./ui/StartScreen";
 import Spinner from "./ui/Spinner";
-
-const Container = styled.main`
-  max-width: 100%;
-  min-height: 100vh;
-  padding: 10px;
-`;
+import { setHighScore, setLocalStorage } from "./js/setHighScore";
+import { getHighScore } from "./js/getHighScore";
 
 const MONSTERS_SELECTED = [];
 
 function App() {
   const [rotate, setRotate] = useState(false);
   const [level, setLevel] = useState("");
-  const [selectedArray, setSelectedArray] = useState(null);
+  const [selectedArray, setSelectedArray] = useState([]);
   const [startGame, setStartGame] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (level === "Easy") setSelectedArray(MONSTERS_EASY);
     if (level === "Medium") setSelectedArray(MONSTERS_MEDIUM);
     if (level === "Hard") setSelectedArray(MONSTERS_HARD);
-  }, [level, selectedArray]);
+    setLocalStorage();
+    setIsLoading((e) => !e);
+    setTimeout(() => {
+      setIsLoading((e) => !e);
+    }, 1500);
+  }, [level]);
 
-  const shuffle = useCallback((array) => {
+  const shuffle = (array) => {
     return array
       .map((a) => ({ sort: Math.random(), value: a }))
       .sort((a, b) => a.sort - b.sort)
       .map((a) => a.value);
-  }, []);
+  };
 
   function handleCardSelection(monster) {
     const hasSelected = MONSTERS_SELECTED.findIndex((el) => el === monster);
@@ -41,19 +41,33 @@ function App() {
     } else {
       setRotate((e) => !e);
       MONSTERS_SELECTED.push(monster);
+      setHighScore(level);
       setTimeout(() => {
         setSelectedArray((value) => (value = shuffle(value)));
-      }, 1000);
+      }, 700);
 
       setTimeout(() => {
         setRotate((e) => !e);
-      }, 1500);
+      }, 2000);
     }
   }
 
   return (
     <React.Fragment>
-      <Spinner />
+      {isLoading && <Spinner />}
+      {!startGame && !isLoading && (
+        <StartScreen
+          handleLevel={setLevel}
+          handleStartGame={setStartGame}
+        ></StartScreen>
+      )}
+      {startGame && !isLoading && (
+        <CardsWrapper
+          rotate={rotate}
+          selectedArray={selectedArray}
+          handleFunction={handleCardSelection}
+        />
+      )}
     </React.Fragment>
   );
 }

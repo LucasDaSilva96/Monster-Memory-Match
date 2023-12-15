@@ -1,21 +1,17 @@
 .loader {
   display: inline-flex;
   gap: 10px;
-  z-index: 10000;
-  width: 100vw;
-  height: 100vh;
+  z-index: 1000;
   position: absolute;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
 }
 .loader:before,
 .loader:after {
   content: "";
-  height: 50px;
+  height: 100px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #000 95%, #0000) 35% 35%/6px 6px
-    no-repeat #fff;
+  background: radial-gradient(farthest-side, #fa0303 95%, #0000) 35% 35%/6px 6px
+    no-repeat #24c9ff;
   animation: l5 3s infinite;
 }
 @keyframes l5 {
