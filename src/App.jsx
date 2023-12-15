@@ -5,8 +5,14 @@ import StartScreen from "./ui/StartScreen";
 import Spinner from "./ui/Spinner";
 import { setHighScore, setLocalStorage } from "./js/setHighScore";
 import { getHighScore } from "./js/getHighScore";
+import styled from "styled-components";
+import HighScore from "./ui/HighScore";
 
 const MONSTERS_SELECTED = [];
+let currentPoint = 0;
+const MainWrapper = styled.main`
+  padding: 10px 150px 10px 10px;
+`;
 
 function App() {
   const [rotate, setRotate] = useState(false);
@@ -41,7 +47,18 @@ function App() {
     } else {
       setRotate((e) => !e);
       MONSTERS_SELECTED.push(monster);
-      setHighScore(level);
+
+      if (level === "Easy") {
+        currentPoint += 5;
+      }
+      if (level === "Medium") {
+        currentPoint += 10;
+      }
+      if (level === "Hard") {
+        currentPoint += 15;
+      }
+
+      setHighScore(level, currentPoint);
       setTimeout(() => {
         setSelectedArray((value) => (value = shuffle(value)));
       }, 700);
@@ -62,11 +79,17 @@ function App() {
         ></StartScreen>
       )}
       {startGame && !isLoading && (
-        <CardsWrapper
-          rotate={rotate}
-          selectedArray={selectedArray}
-          handleFunction={handleCardSelection}
-        />
+        <MainWrapper>
+          <CardsWrapper
+            rotate={rotate}
+            selectedArray={selectedArray}
+            handleFunction={handleCardSelection}
+          />
+          <HighScore
+            HighScoreData={getHighScore()}
+            currentPoint={currentPoint}
+          />
+        </MainWrapper>
       )}
     </React.Fragment>
   );

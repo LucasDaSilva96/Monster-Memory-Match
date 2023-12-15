@@ -1,31 +1,17 @@
 import { getHighScore } from "./getHighScore";
 
-let pointsEasy = 0,
-  pointsMedium = 0,
-  pointsHard = 0;
-export function setHighScore(level) {
-  if (level === "Easy") {
-    pointsEasy <= 98
-      ? (pointsEasy = Math.round(pointsEasy + 1.098))
-      : (pointsEasy = 100);
-    setLocalStorage(level, pointsEasy);
-    return pointsEasy;
+export function setHighScore(level, currentPoint) {
+  const data = getHighScore();
+  if (level === "Easy" && currentPoint > data[0].Easy) {
+    return setLocalStorage("Easy", currentPoint);
   }
 
-  if (level === "Medium") {
-    pointsMedium <= 97
-      ? (pointsMedium = Math.round(pointsMedium + 2.5))
-      : (pointsMedium = 100);
-    setLocalStorage(level, pointsMedium);
-    return pointsMedium;
+  if (level === "Medium" && currentPoint > data[1].Medium) {
+    return setLocalStorage("Medium", currentPoint);
   }
 
-  if (level === "Hard") {
-    pointsHard <= 95
-      ? (pointsHard = Math.round(pointsHard + 5))
-      : (pointsHard = 100);
-    setLocalStorage(level, pointsHard);
-    return pointsHard;
+  if (level === "Hard" && currentPoint > data[2].Hard) {
+    return setLocalStorage("Hard", currentPoint);
   }
 }
 
@@ -48,9 +34,9 @@ export function setLocalStorage(level, points) {
   }
 
   let data = getHighScore();
-  if (level === "Easy") data[0].Easy += points;
-  if (level === "Medium") data[1].Medium += points;
-  if (level === "Hard") data[2].Hard += points;
+  if (level === "Easy") data[0].Easy = points;
+  if (level === "Medium") data[1].Medium = points;
+  if (level === "Hard") data[2].Hard = points;
 
   return window.localStorage.setItem("highScore", JSON.stringify(data));
 }

@@ -1,4 +1,4 @@
-button {
+.level-btn {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -12,7 +12,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.level-btn:hover {
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;
@@ -20,7 +20,7 @@ button:hover {
     0 0 100px #03e9f4;
 }
 
-button span {
+.level-btn span {
   position: absolute;
   display: block;
 }

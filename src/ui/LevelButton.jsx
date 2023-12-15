@@ -3,6 +3,7 @@ import "../css/levelButton.css";
 function LevelButton({ handleLevel, levelText = "Easy", handleStartGame }) {
   return (
     <button
+      className="level-btn"
       onClick={() => {
         handleLevel(levelText);
         setTimeout(() => {
