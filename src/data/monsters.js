@@ -16,15 +16,15 @@ export const MONSTERS_HARD = [
     monster: "Arzuros",
   },
   {
-    image_src: "src/img/Ash-Kecha-Wacha.png",
+    image_src: "/img/Ash-Kecha-Wacha.png",
     monster: "Ash Kecha Wacha",
   },
   {
-    image_src: "src/img/Astalos.png",
+    image_src: "/img/Astalos.png",
     monster: "Astalos",
   },
   {
-    image_src: "src/img/Azure-Rathalos.png",
+    image_src: "/img/Azure-Rathalos.png",
     monster: "Azure Rathalos",
   },
   {
@@ -32,7 +32,7 @@ export const MONSTERS_HARD = [
     monster: "Barioth",
   },
   {
-    image_src: "src/img/Barroth.png",
+    image_src: "/img/Barroth.png",
     monster: "Barroth",
   },
   {
