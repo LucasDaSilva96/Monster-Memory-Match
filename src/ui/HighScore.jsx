@@ -1,5 +1,7 @@
+import React from "react";
 import styled from "styled-components";
 
+// Styled Components
 const HighScoreWrapper = styled.aside`
   width: 150px;
   border-radius: 10px;
@@ -59,6 +61,8 @@ function HighScore({ HighScoreData, currentPoint }) {
   return (
     <HighScoreWrapper>
       <h1>High score</h1>
+
+      {/* Display Easy, Medium, and Hard Scores */}
       <ScoreBox easy="true">
         <p>
           Easy: <strong>{easyScore}</strong>
@@ -74,11 +78,15 @@ function HighScore({ HighScoreData, currentPoint }) {
           Hard: <strong>{hardScore}</strong>
         </p>
       </ScoreBox>
+
+      {/* Display Current Score */}
       <ScoreBox>
         <p>
           Score: <strong>{currentPoint}</strong>
         </p>
       </ScoreBox>
+
+      {/* Quit Button */}
       <QuitBtn onClick={() => window.location.reload()}>Quit</QuitBtn>
     </HighScoreWrapper>
   );
