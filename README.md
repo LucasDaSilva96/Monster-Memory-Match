@@ -37,5 +37,5 @@ This game challenges your memory skills in an exciting match-the-monster adventu
 
 ### Have Fun:
 
-Above all, Monster Memory Match is designed for enjoyment and memory enhancement. Immerse yourself in the world of colorful monsters and the excitement of uncovering matching pairs!
+Above all, Monster Memory Match is designed for enjoyment and memory enhancement. Immerse yourself in the world of colorful monsters and the excitement of uncovering monster!
 Ready to put your memory to the test? Let the Monster Memory Match challenge begin! Remember, no second chances – choose wisely!
