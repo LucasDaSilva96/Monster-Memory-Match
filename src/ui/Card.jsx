@@ -14,7 +14,7 @@ function Card({ image_src, monster, rotate, handleFunction }) {
         </div>
         <div className="card__back">
           <img
-            src="/src/img/Monster-Hunter-Logo.png"
+            src="/img/Monster-Hunter-Logo.png"
             alt="Monster hunter logo"
             className="card__body"
           />

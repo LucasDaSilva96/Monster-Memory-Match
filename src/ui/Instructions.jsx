@@ -36,7 +36,7 @@ const Text = styled.p`
 function Instructions() {
   return (
     <PopUpBox>
-      <img src=".././src/img/male_icon.png" alt="Avatar" />
+      <img src="/img/male_icon.png" alt="Avatar" />
       <Text className="Text">
         A grid of mysterious monster cards will appear based on your chosen
         difficulty level. Your goal is to <strong>NOT</strong> choose the same
